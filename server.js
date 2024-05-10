@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const expressSession = require("express-session");
 const app = express();
+const authMiddleware = require("./middleware/authMiddleware");
 
 //Middleware
 app.use(express.json());
@@ -22,6 +23,9 @@ app.use("*", (req, res, next) => {
 //Controllers
 const signupController = require("./controllers/signupController.js");
 const loginController = require("./controllers/loginController.js");
+const addEmployeeController = require("./controllers/addEmployeeController.js");
+const getEmployeesController = require("./controllers/getEmployeesController.js");
+const logoutController = require("./controllers/logoutController.js");
 
 //Port Details
 const port = process.env.PORT || 4000;
@@ -32,3 +36,6 @@ app.listen(port, () => {
 // Routes
 app.post("/signup", signupController);
 app.post("/login", loginController);
+app.post("/addEmployee", authMiddleware, addEmployeeController);
+app.get("/getEmployees", authMiddleware, getEmployeesController);
+app.get("/logout", logoutController);

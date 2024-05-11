@@ -23,9 +23,11 @@ app.use("*", (req, res, next) => {
 //Controllers
 const signupController = require("./controllers/signupController.js");
 const loginController = require("./controllers/loginController.js");
+const checkingAuthenticationController = require("./controllers/checkingAuthenticationController.js");
 const addEmployeeController = require("./controllers/addEmployeeController.js");
 const getEmployeesController = require("./controllers/getEmployeesController.js");
 const logoutController = require("./controllers/logoutController.js");
+const deleteEmployeeByIdController = require("./controllers/deleteEmployeeByIdController.js");
 
 //Port Details
 const port = process.env.PORT || 4000;
@@ -36,6 +38,8 @@ app.listen(port, () => {
 // Routes
 app.post("/signup", signupController);
 app.post("/login", loginController);
+app.get("/checkAuth", authMiddleware, checkingAuthenticationController);
 app.post("/addEmployee", authMiddleware, addEmployeeController);
 app.get("/getEmployees", authMiddleware, getEmployeesController);
+app.post("/deleteEmployeeById", authMiddleware, deleteEmployeeByIdController);
 app.get("/logout", logoutController);

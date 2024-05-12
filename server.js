@@ -28,6 +28,7 @@ const addEmployeeController = require("./controllers/addEmployeeController.js");
 const getEmployeesController = require("./controllers/getEmployeesController.js");
 const logoutController = require("./controllers/logoutController.js");
 const deleteEmployeeByIdController = require("./controllers/deleteEmployeeByIdController.js");
+const editEmployeeController = require("./controllers/editEmployeeController.js");
 
 //Port Details
 const port = process.env.PORT || 4000;
@@ -40,6 +41,7 @@ app.post("/signup", signupController);
 app.post("/login", loginController);
 app.get("/checkAuth", authMiddleware, checkingAuthenticationController);
 app.post("/addEmployee", authMiddleware, addEmployeeController);
+app.post("/editEmployee", authMiddleware, editEmployeeController);
 app.get("/getEmployees", authMiddleware, getEmployeesController);
 app.post("/deleteEmployeeById", authMiddleware, deleteEmployeeByIdController);
 app.get("/logout", logoutController);

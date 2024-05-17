@@ -29,6 +29,8 @@ const getEmployeesController = require("./controllers/getEmployeesController.js"
 const logoutController = require("./controllers/logoutController.js");
 const deleteEmployeeByIdController = require("./controllers/deleteEmployeeByIdController.js");
 const editEmployeeController = require("./controllers/editEmployeeController.js");
+const addTimesheetController = require("./controllers/addTimesheetController.js");
+const getTimesheetController = require("./controllers/getTimesheetController.js");
 
 //Port Details
 const port = process.env.PORT || 4000;
@@ -44,4 +46,6 @@ app.post("/addEmployee", authMiddleware, addEmployeeController);
 app.post("/editEmployee", authMiddleware, editEmployeeController);
 app.get("/getEmployees", authMiddleware, getEmployeesController);
 app.post("/deleteEmployeeById", authMiddleware, deleteEmployeeByIdController);
+app.post("/addTimesheet", authMiddleware, addTimesheetController);
+app.get("/getTimesheet", authMiddleware, getTimesheetController);
 app.get("/logout", logoutController);

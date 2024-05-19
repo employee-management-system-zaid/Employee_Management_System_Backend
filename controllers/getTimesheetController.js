@@ -8,10 +8,13 @@ const getTimesheetController = async (req, res) => {
     let employees = await employeeModel.find();
 
     let allTimesheets = [];
+    console.log("Timesheets");
+    console.log(timesheets);
 
-    for (let timesheet of timesheets) {
+    if(timesheets.length >0){
+      for (let timesheet of timesheets) {
 
-        let employee = employees.find((element) => element._id == timesheet.selectedEmployee);
+        let employee = employees.find((element) => element.employeeId == timesheet.employeeId);
      
       if (employee) {
         let formattedTimesheet = {
@@ -25,6 +28,10 @@ const getTimesheetController = async (req, res) => {
       }
     }
     return res.json({ message: "All Timesheets", allTimesheets });
+    }
+    else{
+      return res.json({ message: "No Timesheet" });
+    }
   } catch (error) {
     console.error("Error getting timesheets:", error);
     return res.status(500).json({ message: "Error getting timesheets" });

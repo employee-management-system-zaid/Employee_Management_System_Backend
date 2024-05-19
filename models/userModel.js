@@ -8,6 +8,7 @@ const userSchema = new Schema({
   phoneNumber: { type: Number },
   password: { type: String },
   userType: { type: String },
+  employeeId:{ type: String },
 });
 
 userSchema.pre("save", function (next) {

@@ -1,9 +1,22 @@
 const employeeModel = require("../models/employeeModel.js");
+const counterModel = require("../models/counterModel.js");
+
+async function getNextEmployeeId() {
+  const counter = await counterModel.findOneAndUpdate(
+    { id: "employeeId" },
+    { $inc: { seq: 1 } },
+    { new: true, upsert: true }
+  );
+  return counter.seq.toString().padStart(4, '0');
+}
 
 const addEmployeeController = async (req, res) => {
   console.log("Backend on submit");
   try {
+    const employeeId = await getNextEmployeeId();
+
     const employee = {
+      employeeId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phoneNumber: req.body.phoneNumber,
@@ -14,6 +27,7 @@ const addEmployeeController = async (req, res) => {
       department: req.body.department,
       employeeType: req.body.employeeType,
     };
+
     const check = await employeeModel.findOne({ email: employee.email });
 
     if (check) {
@@ -28,4 +42,5 @@ const addEmployeeController = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
 module.exports = addEmployeeController;

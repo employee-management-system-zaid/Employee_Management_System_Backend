@@ -11,10 +11,10 @@ const timesheetSchema = new Schema({
   endTime: {
     type: String,
   },
-  selectedEmployee: {
+  employeeId: {
     type: String,
   }
 });
 
-const timesheetModel = mongoose.model("Timesheet", timesheetSchema);
+const timesheetModel = new mongoose.model("Timesheet", timesheetSchema);
 module.exports = timesheetModel;

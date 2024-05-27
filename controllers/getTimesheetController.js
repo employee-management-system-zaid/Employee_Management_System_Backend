@@ -22,7 +22,8 @@ const getTimesheetController = async (req, res) => {
           startTime: timesheet.startTime,
           endTime: timesheet.endTime,
           employeeName: `${employee.firstName} ${employee.lastName}`,
-          employeeId:employee._id
+          employeeId:employee._id,
+          id:timesheet._id
         };
         allTimesheets.push(formattedTimesheet);
       }
